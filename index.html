@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mihikha's fairy Birthday</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+:root{--pink:#d83f91;--rose:#a85e88;--gold:#d9ad55;--cream:#fff9f2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Poppins,sans-serif;color:#68485f;background:var(--cream)}
+#castleScreen{min-height:100svh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(ellipse at 50% 100%,#ffe0b5aa,transparent 42%),linear-gradient(180deg,#26275e,#69549b 48%,#f4b7cf);isolation:isolate}
+.castle-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.castle-content{padding:30px 20px;max-width:720px;color:white;text-shadow:0 2px 15px #37244f}
+.eyebrow{text-transform:uppercase;letter-spacing:4px;font-size:12px}
+.castle-content h1{font-family:'Playfair Display',serif;font-size:clamp(38px,8vw,72px);line-height:1.05;margin:16px 0;color:#fff6df}
+.castle-content p{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,30px);margin:0 auto 26px}
+.gold-button,.pill{border:2px solid #ffdf91;border-radius:999px;background:linear-gradient(100deg,#d52e91,#a933a7);color:#fff;padding:14px 26px;box-shadow:0 0 0 5px #d9ad5544,0 8px 28px #28173f33;cursor:pointer;text-decoration:none;display:inline-block}
+.gold-button:hover,.pill:hover{transform:translateY(-3px);filter:brightness(1.08)}
+.music-toggle{position:absolute;right:18px;top:18px;border:1px solid #ffffff88;background:#ffffff24;color:white;border-radius:999px;padding:10px 14px;cursor:pointer}
+@keyframes twinkle{from{opacity:.25;transform:scale(.7)}to{opacity:1;transform:scale(1.2)}}
+@keyframes zoomIn{0%{opacity:1;transform:scale(1)}65%{opacity:1;transform:scale(1.18)}100%{opacity:0;transform:scale(1.8)}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+#castleScreen.leaving{animation:zoomIn 1.2s ease-in forwards;pointer-events:none}
+#invitation{display:none}#invitation.visible{display:block;animation:rise .9s ease both}
+.nav{position:sticky;top:0;z-index:5;background:#fffaf3ed;backdrop-filter:blur(10px);border-bottom:1px solid #efd6e3;display:flex;align-items:center;justify-content:space-between;padding:13px max(18px,calc((100% - 1100px)/2));gap:14px}
+.brand{font-family:'Playfair Display',serif;color:#a44b80;font-size:20px}.nav a{color:#9c4c7a;text-decoration:none;font-size:13px;margin-left:15px}
+.hero{position:relative;text-align:center;padding:75px 20px 65px;background:radial-gradient(ellipse at top,#fff,#fff4f8 55%,#eee0f5);overflow:hidden}
+.hero:before,.hero:after{content:'✿ ✧ ❀ ✧ ✿';position:absolute;left:0;right:0;color:#d5a8c9;letter-spacing:14px;opacity:.55;font-size:24px}.hero:before{top:18px}.hero:after{bottom:18px}
+.crown{font-size:46px}.kicker{letter-spacing:3px;text-transform:uppercase;color:#a6799a;font-size:12px}
+.hero h2{font-family:'Playfair Display',serif;color:#a84f82;font-size:clamp(48px,10vw,88px);margin:8px 0;line-height:1}
+.subtitle{font-family:'Cormorant Garamond',serif;font-size:30px;margin:10px 0;color:#79526f}
+.story{font-family:'Cormorant Garamond',serif;font-size:23px;line-height:1.4;max-width:600px;margin:20px auto}
+.section{padding:65px 20px;text-align:center}.section h2{font-family:'Playfair Display',serif;color:#985478;font-size:clamp(32px,5vw,44px);margin:0 0 12px}
+.muted{color:#987c93}.details{max-width:900px;margin:28px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.detail{padding:24px 15px;background:white;border:1px solid #f2dce8;border-radius:22px;box-shadow:0 10px 30px #9c608a12}.icon{font-size:30px}
+.label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b080a0;margin:10px 0 5px}.value{font-weight:500}
+.gallery{max-width:900px;margin:28px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.photo{aspect-ratio:1;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#f9ddea,#e7dcf4);display:grid;place-items:center;color:#926d89;font-size:13px;border:1px solid white}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}.rsvp-wrap{background:linear-gradient(135deg,#f9e4ef,#eee5f8)}
+.footer{text-align:center;padding:32px 20px;font-family:'Cormorant Garamond',serif;font-size:23px;background:#fff9f3}
+.note{font-size:12px;color:#9b8195;margin-top:22px}
+@media(max-width:640px){.nav{align-items:flex-start}.nav nav{display:flex;flex-wrap:wrap;justify-content:flex-end}.nav a{margin:3px 0 3px 10px}.details{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.section{padding:50px 16px}.hero{padding:65px 18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition:none!important}}
+</style></head><body>
+<section id="castleScreen" aria-label="Royal castle entrance">
+<img class="castle-art" src="castle.jpg" alt="" onerror="this.style.display='none'">
+<button class="music-toggle" id="musicToggle" type="button">♫ Music: Off</button>
+<div class="castle-content"><div style="font-size:48px;animation:twinkle 2s infinite alternate">♛</div>
+<div class="eyebrow">A fairytale birthday invitation</div><h1>The Celebration<br>Awaits...</h1>
+<button class="gold-button" id="enterButton" type="button">👑 Enter the Castle ✨</button>
+<div style="margin-top:24px;font-size:22px;animation:twinkle 2s infinite alternate">✦ · ✧ · ✦</div></div>
+<audio id="birthdayMusic" loop preload="none"><!-- Add a song you have rights to use as images/birthday-song.mp3 and add a source tag here. --><source src="birthday-song.mp3" type="audio/mpeg"></audio>
+</section>
+<div id="invitation"><header class="nav"><div class="brand">♛ Mihikha's Birthday</div><nav><a href="#home">Home</a><a href="#details">Details</a><a href="#gallery">Gallery</a><a href="#rsvp">RSVP</a></nav></header>
+<section class="hero" id="home"><div class="crown">👑</div><div class="kicker">You're invited to a ONE-derful celebration</div><h2>Mihikha</h2><div class="subtitle">Our Little Princess</div><div class="subtitle" style="font-size:23px">is turning <strong>ONE</strong>!</div><div class="story">Once upon a time, a little princess brought endless smiles and love into our world...<br>Now it's time to celebrate her special day! Join us for a magical day filled with love, laughter and endless joy.</div><a class="pill" href="#details">Explore the Invitation ✨</a></section>
+<section class="section" id="details"><h2>The fairy Celebration</h2><p class="muted">Please join us to celebrate.</p><div class="details">
+<div class="detail"><div class="icon">📅</div><div class="label">Date</div><div class="value">1st Novemeber 2026</div></div>
+<div class="detail"><div class="icon">🕰️</div><div class="label">Time</div><div class="value">7:30PM</div></div>
+<div class="detail"><div class="icon">📍</div><div class="label">Venue</div><div class="value">Hotel SVM Grand, Level 6, Medipally,Peerzadiguda, Hyderabad, Telangana 500098</div></div></div><a class="pill" href="https://maps.app.goo.gl/r7HdSZicxESL9ebT6" target="_blank" rel="noopener">📍 View Location</a></section>
+<section class="section" id="gallery" style="background:#fff7fb"><h2>Little Moments, Big Happiness</h2><p class="muted">A few treasured memories of Mihikha 💗</p><div class="gallery">
+<div class="photo"><img src="mihikha1.jpg" alt="Mihikha photo 1" onerror="this.remove();this.parentElement.textContent='Add Photo 1'"></div>
+<div class="photo"><img src="mihikha2.jpg" alt="Mihikha photo 2" onerror="this.remove();this.parentElement.textContent='Add Photo 2'"></div>
+<div class="photo"><img src="mihikha3.jpg" alt="Mihikha photo 3" onerror="this.remove();this.parentElement.textContent='Add Photo 3'"></div>
+<div class="photo"><img src="mihikha4.jpg" alt="Mihikha photo 4" onerror="this.remove();this.parentElement.textContent='Add Photo 4'"></div>
+<div class="photo"><img src="mihikha5.jpg" alt="Mihikha photo 5" onerror="this.remove();this.parentElement.textContent='Add Photo 5'"></div>
+<div class="photo"><img src="mihikha6.jpg" alt="Mihikha photo 6" onerror="this.remove();this.parentElement.textContent='Add Photo 6'"></div></div></section>
+<section class="section rsvp-wrap" id="rsvp"><div style="font-size:38px">💌</div><h2>Come.. Join Us!</h2><p>We would love to celebrate this magical day with you!</p></section>
+<section class="section"><h2>Countdown to the Day</h2><div id="countdown" style="font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,40px);color:#a84f82;margin-top:18px">Add the birthday date in the code</div></section>
+<footer class="footer">With love, M&M Family</strong> 💕</footer></div>
+<script>
+// EDIT THIS DATE (local time), e.g. "2026-11-01T18:00:00"
+const COUNTDOWN_DATE = "2026-11-01T19:00:00";
+const enterButton=document.getElementById('enterButton'), castleScreen=document.getElementById('castleScreen'), invitation=document.getElementById('invitation');
+enterButton.addEventListener('click',()=>{castleScreen.classList.add('leaving');setTimeout(()=>{castleScreen.style.display='none';invitation.classList.add('visible');window.scrollTo({top:0,behavior:'smooth'});},1100);});
+const music=document.getElementById('birthdayMusic'),musicToggle=document.getElementById('musicToggle');
+musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicToggle.textContent='♫ Music: On';}catch(e){musicToggle.textContent='♫ Add song file first';}}else{music.pause();musicToggle.textContent='♫ Music: Off';}});
+function updateCountdown(){const el=document.getElementById('countdown'),target=new Date(COUNTDOWN_DATE).getTime();if(!Number.isFinite(target)){el.textContent='Please set the birthday date';return;}const d=target-Date.now();if(d<=0){el.textContent='The royal celebration has begun! 🎉';return;}const days=Math.floor(d/86400000),hours=Math.floor(d%86400000/3600000),minutes=Math.floor(d%3600000/60000),seconds=Math.floor(d%60000/1000);el.textContent=`${days} Days • ${hours} Hours • ${minutes} Minutes • ${seconds} Seconds`;}
+updateCountdown();setInterval(updateCountdown,1000);
+</script></body></html>
