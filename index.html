@@ -108,6 +108,19 @@ document.addEventListener('click', async () => {
         }
     }
 }, { once: true });
+
+document.addEventListener('click', async function startOnFirstClick() {
+    if (!musicStarted && music.paused) {
+        try {
+            await music.play();
+            musicStarted = true;
+            musicToggle.textContent = '♫ Music: On';
+        } catch (error) {
+            musicToggle.textContent = '♫ Tap to Play Music';
+        }
+    }
+}, { once: true });
+
 function updateCountdown(){const el=document.getElementById('countdown'),target=new Date(COUNTDOWN_DATE).getTime();if(!Number.isFinite(target)){el.textContent='Please set the birthday date';return;}const d=target-Date.now();if(d<=0){el.textContent='The royal celebration has begun! 🎉';return;}const days=Math.floor(d/86400000),hours=Math.floor(d%86400000/3600000),minutes=Math.floor(d%3600000/60000),seconds=Math.floor(d%60000/1000);el.textContent=`${days} Days • ${hours} Hours • ${minutes} Minutes • ${seconds} Seconds`;}
 updateCountdown();setInterval(updateCountdown,1000);
 </script></body></html>
