@@ -70,7 +70,7 @@ const COUNTDOWN_DATE = "2026-11-01T19:00:00";
 const enterButton=document.getElementById('enterButton'), castleScreen=document.getElementById('castleScreen'), invitation=document.getElementById('invitation');
 enterButton.addEventListener('click',()=>{castleScreen.classList.add('leaving');setTimeout(()=>{castleScreen.style.display='none';invitation.classList.add('visible');window.scrollTo({top:0,behavior:'smooth'});},1100);});
 const music=document.getElementById('birthdayMusic'),musicToggle=document.getElementById('musicToggle');
-musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicToggle.textContent='♫ Music: On';}catch(e){musicToggle.textContent='♫ Add song file first';}}else{music.pause();musicToggle.textContent='♫ Music: Off';}});
+musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicToggle.textContent='♫ Music: On';}catch(e){musicToggle.textContent='♫ Add song file first';}}else{music.play();musicToggle.textContent='♫ Music: Off';}});
 function updateCountdown(){const el=document.getElementById('countdown'),target=new Date(COUNTDOWN_DATE).getTime();if(!Number.isFinite(target)){el.textContent='Please set the birthday date';return;}const d=target-Date.now();if(d<=0){el.textContent='The royal celebration has begun! 🎉';return;}const days=Math.floor(d/86400000),hours=Math.floor(d%86400000/3600000),minutes=Math.floor(d%3600000/60000),seconds=Math.floor(d%60000/1000);el.textContent=`${days} Days • ${hours} Hours • ${minutes} Minutes • ${seconds} Seconds`;}
 updateCountdown();setInterval(updateCountdown,1000);
 </script></body></html>
